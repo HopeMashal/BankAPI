@@ -4,7 +4,7 @@
 
 | Property | Type     | Description                                                  |
 | -------- | -------- | ------------------------------------------------------------ |
-| userId   | `String` | Unique id  |
+| id   | `String` | Unique id  |
 | name     | `String` | User name(should also be unique to prevent duplicates |
 | isActive  | `Boolean` |  Active or Inactive Account |
 | cash     | `Number` | Default 0  |
@@ -12,11 +12,11 @@
 
 ## Create User
 
-Creates a new user with the given name and returns the user object.
+Creates a new user with the given name and id returns the user name and id.
 
 -   **URL**
 
-    /users/
+    /Users/
 
 -   **Method:**
 
@@ -26,50 +26,60 @@ Creates a new user with the given name and returns the user object.
 
 | Name   | Type     | Description                                    |
 | ------ | -------- | ---------------------------------------------- |
-| name   | `String` | <p></p>                                        |
-| cash   | `Number` | <p>Optional. Initial cash value. Default 0</p> |
-| credit | `Number` | <p>Optional. Initial cash value. Default 0</p> |
+| id     | `String` |                                                |
+| name   | `String` |                                                |
+| isActive | `Boolean` | Optional. Initial isActive value (Default false)  |
+| cash   | `Number` | Optional. Initial cash value (Default 0)        |
+| credit | `Number` | Optional. Initial credit value (Default 0)        |
 
-## Update user(credit, balance)
+## Update user(credit)
 
-Updates single user and returns the updated user object.
+Updates single user (active account) and returns the new value of credit.
 
 -   **URL**
 
-    /users/:id
+    /Users/credit/:id/:creditvalue
 
 -   **Method:**
 
     `PUT`
 
-### Parameters - `Request Body Parameters`
+## Update user(Deposit cash to a user)
 
-| Name   | Type     | Description                     |
-| ------ | -------- | ------------------------------- |
-| name   | `String` | <p>Optional. The new value.</p> |
-| cash   | `Number` | <p>Optional. The new value.</p> |
-| credit | `Number` | <p>Optional. The new value.</p> |
+Updates single user (active account) and returns the new value of cash.
+
+-   **URL**
+
+    /Users/deposit/:id/:amount
+
+-   **Method:**
+
+    `PUT`
+
+## Update user(Withdraw money from the user account)
+
+Updates single user (active account) and returns the new value of cash or the new value of credit.
+
+-   **URL**
+
+    /Users/withdraw/:id/:amount
+
+-   **Method:**
+
+    `PUT`
 
 ## Transfer money
 
-Gets the ids of the users to transfer money to/from and the amount to transfer.
-Returns the 2 updated user objects.
+Gets the ids of the users to transfer money to/from (active account) and the amount to transfer.
+Returns the cash value of received user.
 
 -   **URL**
 
-    /users/transfer
+    /Users/transfer/:idFrom/:idTo/:amount
 
 -   **Method:**
 
     `PUT`
-
-### Parameters - `Request Body Parameters`
-
-| Name     | Type     | Description |
-| -------- | -------- | ----------- |
-| idSource | `String` | <p></p>     |
-| cash     | `Number` | <p></p>     |
-| idTarget | `String` | <p></p>     |
 
 ## **Show User**
 
@@ -77,7 +87,7 @@ Returns json data about a single user.
 
 -   **URL**
 
-    /users/:id
+    /Users/:id
 
 -   **Method:**
 
@@ -96,12 +106,12 @@ Returns json data about a single user.
 -   **Success Response:**
 
     -   **Code:** 200 <br />
-        **Content:** `{ id : 12, name : "Michael Bloomberg", cash : 100, credit : 0 }`
+        **Content:** `{ id : ..., name : "...", cash : ..., credit : ... }`
 
 -   **Error Response:**
 
-    -   **Code:** 404 NOT FOUND <br />
-        **Content:** `{ error : "User doesn't exist" }`
+    -   **Code:** 400 <br />
+        **Content:** `{ error : "User does not exist, check the ID you entered" }`
 
 ## **Show All Users**
 
@@ -109,7 +119,7 @@ Returns json data about all users.
 
 -   **URL**
 
-    /users/all
+    /Users
 
 -   **Method:**
 
@@ -126,9 +136,28 @@ Returns json data about all users.
 -   **Success Response:**
 
     -   **Code:** 200 <br />
-        **Content:** `{ id : 12, name : "Michael Bloomberg", cash : 100, credit : 0 } { id : 13, name : "Michael Fish", cash : 100, credit : 0 }`...
+        **Content:** `{ id : ..., name : "...", cash : ..., credit : ... } { id : ..., name : "...", cash : ..., credit : ... }`...
 
--   **Error Response:**
+## Filter user
 
-    -   **Code:** 404 NOT FOUND <br />
-        **Content:** `{ error : "No users exist" }`
+Fetch the users that are active and have a specified amount of cash
+
+-   **URL**
+
+    /Users/filter/:fromAmount/:toAmount
+
+-   **Method:**
+
+    `GET`
+
+## Active/Inactive
+
+Activation or Inactivation of the user account
+
+-   **URL**
+
+    /Users/:id/active **OR** /Users/:id/inactive
+
+-   **Method:**
+
+    `PUT`
