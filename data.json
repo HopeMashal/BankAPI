@@ -1,0 +1,39 @@
+[
+  {
+    "id":"102030405",
+    "name":"Hope Mashal",
+    "isActive":true,
+    "credit":1500,
+    "cash":1000
+  },{
+    "id":"102030405",
+    "name":"Amal Mashal",
+    "isActive":true,
+    "credit":2200,
+    "cash":500
+  },{
+    "id":"102030405",
+    "name":"Yuki Akira",
+    "isActive":false,
+    "credit":200,
+    "cash":900
+  },{
+    "id":"102030405",
+    "name":"Hope Akira",
+    "isActive":true,
+    "credit":3000,
+    "cash":2500
+  },{
+    "id":"102030405",
+    "name":"Hope Mishael",
+    "isActive":false,
+    "credit":2010,
+    "cash":2230
+  },{
+    "id":"102030405",
+    "name":"Yoland Hayrettin",
+    "isActive":true,
+    "credit":3200,
+    "cash":502
+  }
+]

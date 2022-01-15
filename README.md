@@ -4,10 +4,11 @@
 
 | Property | Type     | Description                                                  |
 | -------- | -------- | ------------------------------------------------------------ |
-| userId   | `String` | <p>Unique id </p>                                            |
-| name     | `String` | <p>User name(should also be unique to prevent duplicates</p> |
-| cash     | `Number` | <p>Default 0</p>                                             |
-| credit   | `Number` | <p>Default 0</p>                                             |
+| userId   | `String` | Unique id  |
+| name     | `String` | User name(should also be unique to prevent duplicates |
+| isActive  | `Boolean` |  Active or Inactive Account |
+| cash     | `Number` | Default 0  |
+| credit   | `Number` | Default 0  |
 
 ## Create User
 
